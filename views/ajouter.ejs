@@ -1,0 +1,65 @@
+
+	<table class="tableau" >
+
+	<br>
+	<br>
+	<% let noligne = 0 %><% let noligne2 = 0 %>
+
+
+
+
+	<% for(elm of adresses) {%>
+		<% if (noligne==0) {%>
+		<tr>	
+			<% for (nomProp in elm) {%>		 
+		<td> 
+			<% if (nomProp!="Générer personne") {%>
+				<a href="http://localhost:8081/trier-<%= nomProp %>-<%= ordre%>">
+					<%= nomProp %>
+				</a>	
+			<% } %>
+		</td>
+			<% if (nomProp=="courriel") {%>
+				<td> <%- include('viderCollection') %>	 </td>
+			<% } %>
+		<% } %>
+
+		</tr>
+	 		<% } %>
+			
+			<% noligne++ %>
+		
+			<tr>
+				<% for(nomProp in elm) {%>
+		 			
+				<td <% if (nomProp!="_id") {%> contenteditable="true"<% } %>  class="<%= nomProp %>">
+		 			<%= elm[nomProp] %>
+
+		 		</td>
+
+				<% } %>
+		
+				<td>
+					<a href=http://localhost:8081/detruire/<%= elm["_id"] %> > Détruire </a>
+					<button class="modif">modifier</button>
+				</td>
+			
+			</tr>
+		<% } %>
+
+	 </table>
+
+
+
+<form id="formInvisible" action="/modifier" method="POST" >
+	<input type="hidden" placeholder="_id" name="_id" class="_id">
+	<input type="hidden" placeholder="nom" name="nom" class="nom">
+	<input type="hidden" placeholder="prenom"  name="prenom" class="prenom">
+	<input type="hidden" placeholder="telephone" name="telephone" class="telephone">
+	<input type="hidden" placeholder="courriel" name="courriel" class="courriel">
+	
+</form>
+
+<script type="text/javascript" src="btnModifier.js"> </script>
+
+			
